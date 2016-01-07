@@ -1,4 +1,4 @@
-package crawler;
+package crawling;
 
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
@@ -15,13 +15,13 @@ import shared.Params;
 /**
  * use this class for get a initialized CrawlController instance
  */
-public abstract class BusinessCrawlController {
+public class BusinessCrawlController {
 
     private BusinessCrawlController(){}
 
     public CrawlController setup() throws Exception {
 
-        // config the crawler
+        // config the crawling
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(Params.PATH_TEMP_STORAGE);
         config.setPolitenessDelay(Params.POLITENESS_DELAY);

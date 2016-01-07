@@ -1,4 +1,4 @@
-package crawler;
+package crawling;
 
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
@@ -11,10 +11,10 @@ import edu.uci.ics.crawler4j.url.WebURL;
 
 /**
  * this class has been write to
- * crawl Estekhdamkhabar's business feed
- * url is: http://estekhdamkhabar.com/
+ * crawl donyayekar's business feed
+ * url is: http://donyayekar.ir/
  */
-public class EstekhdamkhabarCrawler extends WebCrawler {
+public class DonyayekarCrawler extends WebCrawler {
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         return super.shouldVisit(referringPage, url);
