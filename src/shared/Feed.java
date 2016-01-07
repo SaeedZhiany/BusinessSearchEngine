@@ -2,6 +2,7 @@ package shared;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by SAEED on 2016-01-07
@@ -14,10 +15,16 @@ public class Feed {
     private String city;
 
     public Feed() throws ParseException {
-        this("","", Params.DATE_FORMAT_YYYY_MM_DD,"","");
+        this(
+            "",
+            "",
+            "",
+            new SimpleDateFormat(Params.DATE_FORMAT_YYYY_MM_DD).format(new Date()),
+            Params.DATE_FORMAT_YYYY_MM_DD
+        );
     }
 
-    public Feed(String title, String date, String curFormat, String body, String city) throws ParseException {
+    public Feed(String title, String body, String city, String date, String curFormat) throws ParseException {
         this.title = title;
         setDate(date, curFormat);
         this.body = body;

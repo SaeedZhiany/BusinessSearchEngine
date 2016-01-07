@@ -1,4 +1,4 @@
-package crawler;
+package crawling;
 
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
@@ -21,7 +21,7 @@ public abstract class BusinessCrawlController {
 
     public CrawlController setup() throws Exception {
 
-        // config the crawler
+        // config the crawling
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(Params.PATH_TEMP_STORAGE);
         config.setPolitenessDelay(Params.POLITENESS_DELAY);
