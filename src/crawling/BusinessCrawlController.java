@@ -15,7 +15,7 @@ import shared.Params;
 /**
  * use this class for get a initialized CrawlController instance
  */
-public abstract class BusinessCrawlController {
+public class BusinessCrawlController {
 
     private BusinessCrawlController(){}
 
