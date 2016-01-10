@@ -19,7 +19,7 @@ public class BusinessCrawlController {
 
     private BusinessCrawlController(){}
 
-    public CrawlController setup() throws Exception {
+    public static CrawlController setup() throws Exception {
 
         // config the crawling
         CrawlConfig config = new CrawlConfig();
