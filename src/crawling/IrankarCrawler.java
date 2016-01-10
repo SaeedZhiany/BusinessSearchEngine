@@ -43,10 +43,7 @@ public class IrankarCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
 
-        if (page.getWebURL().getURL().toLowerCase().equals("http://www.irankar.biz/")) {
-            return;
-        }
-        else {
+        if (!page.getWebURL().getURL().toLowerCase().equals("http://www.irankar.biz/")) {
             try {
                 System.out.println(URLDecoder.decode(page.getWebURL().getURL(), "UTF8"));
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
