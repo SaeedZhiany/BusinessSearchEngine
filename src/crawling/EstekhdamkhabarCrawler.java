@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
  * url is: http://estekhdamkhabar.com/
  */
 public class EstekhdamkhabarCrawler extends WebCrawler {
+
     Pattern filter = Pattern.compile
             ("http://estekhdamkhabar\\.com/[\\d]+/[\\d]+/[\\d]+/.*استخدام.*");
 
@@ -67,4 +68,5 @@ public class EstekhdamkhabarCrawler extends WebCrawler {
 
         }
     }
+
 }
