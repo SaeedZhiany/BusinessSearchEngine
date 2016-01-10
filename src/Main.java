@@ -12,8 +12,10 @@ public class Main {
             CrawlController controller = BusinessCrawlController.setup();
             controller.addSeed("http://www.irankar.biz");
             controller.start(IrankarCrawler.class, 1);
+
         } catch (Exception e) {
             e.printStackTrace();
+            //System.out.println(e.getMessage());
         }
     }
 }
