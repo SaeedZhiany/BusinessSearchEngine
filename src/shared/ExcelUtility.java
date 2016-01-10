@@ -21,7 +21,8 @@ public class ExcelUtility {
     private static final int INDEX_TITLE = 0;
     private static final int INDEX_BODY = 1;
     private static final int INDEX_CITY = 2;
-    private static final int INDEX_DATE = 3;
+    private static final int INDEX_URL = 3;
+    private static final int INDEX_DATE = 4;
 
     /**
      * write fetched data to appropriate sheet
@@ -52,6 +53,10 @@ public class ExcelUtility {
                 cell = row.createCell(INDEX_CITY); // create city cell
                 cell.setCellType(Cell.CELL_TYPE_STRING); // set type of cell
                 cell.setCellValue(feed.getCity());
+
+                cell = row.createCell(INDEX_URL); // create url cell
+                cell.setCellType(Cell.CELL_TYPE_STRING); // set type of cell
+                cell.setCellValue(feed.getUrl());
 
                 cell = row.createCell(INDEX_DATE); // create date cell
                 cell.setCellType(Cell.CELL_TYPE_STRING); // set type of cell
@@ -88,9 +93,9 @@ public class ExcelUtility {
                         row.getCell(INDEX_TITLE).getStringCellValue(),
                         row.getCell(INDEX_BODY).getStringCellValue(),
                         row.getCell(INDEX_CITY).getStringCellValue(),
+                        row.getCell(INDEX_URL).getStringCellValue(),
                         row.getCell(INDEX_DATE).getStringCellValue(),
-                        Params.DATE_FORMAT_YYYY_MM_DD
-                );
+                        Params.DATE_FORMAT_YYYY_MM_DD);
 
                 feeds.add(feed);
             }

@@ -10,25 +10,27 @@ import java.util.Date;
  */
 public class Feed {
     private String title;
-    private String date;
     private String body;
     private String city;
+    private String url;
+    private String date;
 
     public Feed() throws ParseException {
         this(
             "",
             "",
             "",
+            "",
             new SimpleDateFormat(Params.DATE_FORMAT_YYYY_MM_DD).format(new Date()),
-            Params.DATE_FORMAT_YYYY_MM_DD
-        );
+            Params.DATE_FORMAT_YYYY_MM_DD);
     }
 
-    public Feed(String title, String body, String city, String date, String curFormat) throws ParseException {
+    public Feed(String title, String body, String city, String url, String date, String curFormat) throws ParseException {
         this.title = title;
-        setDate(date, curFormat);
         this.body = body;
         this.city = city;
+        this.url = url;
+        setDate(date, curFormat);
     }
 
     public String getTitle() {
@@ -69,5 +71,13 @@ public class Feed {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
