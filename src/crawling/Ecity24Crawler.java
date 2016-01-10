@@ -33,7 +33,7 @@ public class Ecity24Crawler extends WebCrawler {
                     !decodedString.startsWith("http://www.irankar.biz/category");
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
-            return false;
+            return false;           // commit
         }*/
         String href = url.getURL();
         return href.startsWith("http://www.ecity24.ir/RJobs.aspx");
