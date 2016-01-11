@@ -14,7 +14,8 @@ import edu.uci.ics.crawler4j.url.WebURL;
  * crawl Karyabisazandegi's business feed
  * url is: http://www.karyabisazandegi.ir/portal/
  */
-public class KaryabisazandegyCrawler extends WebCrawler {
+
+public class karyabisazandegiCrawler extends WebCrawler {
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         return super.shouldVisit(referringPage, url);
