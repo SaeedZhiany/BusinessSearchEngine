@@ -33,7 +33,7 @@ public class PnunaCrawler extends WebCrawler {
     private final String DATE_SPLITTER = ": ";
     private final String DATE_DETAIL_SPLITTER = " ";
     private final String pnunaDateFormat = "yyyy/mm/dd";
-    private final Pattern filter = Pattern.compile("http://job.pnuna.com/.*استخدام.*/");
+    private final Pattern filter = Pattern.compile("^http://job.pnuna.com/13[0-9][2]/.*استخدام.*\\.html/");
 
     private final ArrayList<Feed> feeds = new ArrayList<Feed>();
 
@@ -42,8 +42,8 @@ public class PnunaCrawler extends WebCrawler {
         try {
             String href = url.getURL().toLowerCase();
             String decodedString = URLDecoder.decode(href, "UTF8");
-            return filter.matcher(decodedString).matches() &&
-                    !decodedString.startsWith("http://www.irankar.biz/category") && !decodedString.startsWith("http://www.irankar.biz/tag");
+            return decodedString.startsWith("http://job.pnuna.com/13") && decodedString.contains("استخدام") && !decodedString.startsWith("http://job.pnuna.com/category") && !decodedString.startsWith("http://job.pnuna.com/tag");
+
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
             return false;
@@ -52,65 +52,50 @@ public class PnunaCrawler extends WebCrawler {
 
     @Override
     public void visit(Page page) {
-        if (!page.getWebURL().getURL().toLowerCase().equals("http://job.pnuna.com/")) {
-            Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
-            Elements DateElements = doc.getElementsByClass(".fa fa-clock-o");
-            Elements BodyElements = doc.getElementsByClass(".entry-content");
-            Elements TitleElements = doc.getElementsByClass(".box .box-top");
-            Elements CityElements = doc.getElementsByClass(".post-info1 li");
+        try {
+            if (!URLDecoder.decode(page.getWebURL().getURL(), "UTF8").toLowerCase().equals("http://job.pnuna.com/")) {
+                Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
+                Elements elements = doc.select("br+ p > span , span span strong , .post-info li:nth-child(2) , .box-top a");
 
-            //Date
-            String[] Date = DateElements.text().split(DATE_SPLITTER)[1].split(DATE_DETAIL_SPLITTER);
-            Date[1] = CalendarUtility.getNumericMonth(Date[1]).toString(); // convert alphabet month to numeric
+                for (Element element : elements)
+                    System.out.println(element.text());
+                //title
+                String title = elements.get(0).text().trim();
+                elements.remove(elements.get(0));
 
-            //Body
-            String Body;
-            Element p = null;
-            for (Element element : BodyElements)
-                if (element.getElementsByTag("p") != null)
-                    p = element.getElementsByTag("p").get(0);
-            if (p == null) {
-                System.err.println("No title found");
-                Body = null;
+                //city
+                String city = "";
+
+                //date
+                String[] date = elements.get(elements.size() - 1).text().split(DATE_SPLITTER)[1].split(DATE_DETAIL_SPLITTER);
+                date[1] = CalendarUtility.getNumericMonth(date[1]).toString(); // convert alphabet month to numeric
+                elements.remove(elements.get(elements.size() - 1));
+
+                //body
+                String body = "";
+                for (Element element : elements)
+                    body = body.concat(element.text().trim());
+                //System.out.println(body);
+                try {
+                    Feed feed = new Feed(
+                            title,
+                            body,
+                            city,
+                            page.getWebURL().toString(),
+                            date[2] + "/" + date[1] + "/" + date[0],
+                            pnunaDateFormat);
+                    feeds.add(feed);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
-            else
-                Body = p.text().trim();
-
-            //Title
-            String Title;
-            Element h1 = null;
-            for (Element element : TitleElements)
-                if (element.getElementsByTag("p") != null)
-                    h1 = element.getElementsByTag("p").get(0);
-            if (p == null) {
-                System.err.println("No title found");
-                Title = null;
-            }
-            else
-                Title = p.text().trim();
-
-            //City
-            String[] Cities = CityElements.get(0).text().split("-");
-            String City = "";
-            for (String st : Cities)
-                City.concat(st + " ");
-            try {
-                Feed feed = new Feed(
-                        Title,
-                        Body,
-                        City,
-                        page.getWebURL().toString(),
-                        Date[2] + "/" + Date[1] + "/" + Date[0],
-                        pnunaDateFormat);
-                feeds.add(feed);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
+        @Override
+        public void onBeforeExit(){
+            ExcelUtility.writeToExcel(feeds, Params.SHEET_PNUNA);
+        }
 
-    @Override
-    public void onBeforeExit() {
-        ExcelUtility.writeToExcel(feeds, Params.SHEET_PNUNA);
-    }
 }
