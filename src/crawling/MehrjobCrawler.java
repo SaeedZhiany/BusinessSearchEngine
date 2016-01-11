@@ -66,7 +66,6 @@ public class MehrjobCrawler extends WebCrawler {
                 return;
             } else {
 
-                System.out.println(URLDecoder.decode(href, "UTF8"));
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
                 Elements elements = doc.select
                         (".blog-post p:nth-child(1) , .blog-post-meta , .blog-post-title");
@@ -81,12 +80,10 @@ public class MehrjobCrawler extends WebCrawler {
                     }
                 }
 
-                System.out.println(city);
 
                 String[] date = elements.get(1).text().split(" ");
                 date[1] = CalendarUtility.getNumericMonth(date[1]).toString();
 
-                //System.out.println(date[2] + "/" + date[1] + "/" + date[0]);
 
                 String body = elements.get(2).text();
 
