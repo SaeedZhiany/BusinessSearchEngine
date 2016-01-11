@@ -14,6 +14,10 @@ import edu.uci.ics.crawler4j.url.WebURL;
  * crawl dl-pa's business feed
  * url is: http://www.dl-pa.ir/
  */
+
+/**
+ * سرور این سایت، down شده است
+ */
 public class DlpaCrawler extends WebCrawler {
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {

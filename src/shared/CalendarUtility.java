@@ -22,7 +22,22 @@ public class CalendarUtility {
 "بهمن",
 "اسفند"
     ));
+
+    private static final String EnglishNumber = "0123456789";
+    private static final String PersianNumber = "۰۱۲۳۴۵۶۷۸۹";
+
     public static Integer getNumericMonth(String month){
         return months.indexOf(month) + 1;
+    }
+
+    public static String getEnglishDate(String persianDate){
+        StringBuilder builder = new StringBuilder("");
+        for (char c : persianDate.toCharArray()){
+            if(c != '/')
+                builder.append(EnglishNumber.charAt(PersianNumber.indexOf(c)));
+            else
+                builder.append(c);
+        }
+        return builder.toString();
     }
 }

@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ public class ExcelUtility {
 
                 cell = row.createCell(INDEX_URL); // create url cell
                 cell.setCellType(Cell.CELL_TYPE_STRING); // set type of cell
-                cell.setCellValue(feed.getUrl());
+                cell.setCellValue(URLDecoder.decode(feed.getUrl(), "UTF8"));
 
                 cell = row.createCell(INDEX_DATE); // create date cell
                 cell.setCellType(Cell.CELL_TYPE_STRING); // set type of cell

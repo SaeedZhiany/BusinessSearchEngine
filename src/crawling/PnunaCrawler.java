@@ -110,7 +110,7 @@ public class PnunaCrawler extends WebCrawler {
     }
 
     @Override
-    public void onBeforeExit() {
+    public void onBeforeExit() { // write the results in excel before exit
         ExcelUtility.writeToExcel(feeds, Params.SHEET_PNUNA);
     }
 }
