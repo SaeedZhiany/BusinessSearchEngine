@@ -53,6 +53,7 @@ public class PnunaCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         try {
+
             if (!URLDecoder.decode(page.getWebURL().getURL(), "UTF8").toLowerCase().equals("http://job.pnuna.com/")) {
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
                 Elements elements = doc.select("br+ p > span , span span strong , .post-info li:nth-child(2) , .box-top a");
