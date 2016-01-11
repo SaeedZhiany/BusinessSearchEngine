@@ -53,28 +53,32 @@ public class PnunaCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         try {
-
+// , .box-top a         br+ p > span , span span strong , .post-info li:nth-child(2)
             if (!URLDecoder.decode(page.getWebURL().getURL(), "UTF8").toLowerCase().equals("http://job.pnuna.com/")) {
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
-                Elements elements = doc.select("br+ p > span , span span strong , .post-info li:nth-child(2) , .box-top a");
+                Elements elements1 = doc.select(".post-info li:nth-child(2) , .box-top a");
+                Elements elements2 = doc.select(".post-info1 li:nth-child(1) a");
+                Elements elements3 = doc.select("br+ p span");
 
-                for (Element element : elements)
+                for (Element element: elements3){
                     System.out.println(element.text());
+                    System.out.println("+++++");}
                 //title
-                String title = elements.get(0).text().trim();
-                elements.remove(elements.get(0));
-
-                //city
+                String title = elements1.get(0).text().trim();
+                elements1.remove(elements1.get(0));
                 String city = "";
 
+                //city
+                String sity = elements2.text().trim();
+
                 //date
-                String[] date = elements.get(elements.size() - 1).text().split(DATE_SPLITTER)[1].split(DATE_DETAIL_SPLITTER);
+                String[] date = elements1.get(elements1.size() - 1).text().split(DATE_SPLITTER)[1].split(DATE_DETAIL_SPLITTER);
                 date[1] = CalendarUtility.getNumericMonth(date[1]).toString(); // convert alphabet month to numeric
-                elements.remove(elements.get(elements.size() - 1));
+                elements1.remove(elements1.get(elements1.size() - 1));
 
                 //body
-                String body = "";
-                for (Element element : elements)
+                String body = elements3.text().trim();
+                for (Element element : elements1)
                     body = body.concat(element.text().trim());
                 //System.out.println(body);
                 try {
