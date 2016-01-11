@@ -28,6 +28,8 @@ public class Main {
 
             /*controller.addSeed("http://www.baroot.com/result/index.php?page=1");
             controller.start(BarootCrawler.class, 1);*/
+            controller.addSeed("http://www.eshetab.com/");
+            controller.start(EshetabCrawler.class, 1);
 
         } catch (Exception e) {
             e.printStackTrace();

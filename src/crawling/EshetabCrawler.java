@@ -8,9 +8,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import shared.CalendarUtility;
+import shared.ExcelUtility;
+import shared.Feed;
+import shared.Params;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
@@ -30,7 +36,7 @@ public class EshetabCrawler extends WebCrawler {
 
     Pattern filter2 = Pattern.compile
             ("http://eshetab\\.com/ads/.*");
-
+    private ArrayList<Feed> feeds;
 
 
     @Override
@@ -58,20 +64,49 @@ public class EshetabCrawler extends WebCrawler {
         }
 
         else {
-            try {
-                System.out.println(URLDecoder.decode(page.getWebURL().getURL(), "UTF8"));
-                Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
-                Elements elements = doc.select
-                        (".addsTexts , .nameDiv:nth-child(3) , .nameDiv:nth-child(2) , .DivTitle span");
-                for (Element element : elements) {
-                    System.out.println(element.text());
-                    System.out.println("==========");
-                }
-            } catch (UnsupportedEncodingException ex) {
-                ex.printStackTrace();
-            }
+            Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
+            Elements elements = doc.select
+                    (".addsTexts , .nameDiv:nth-child(3) , .nameDiv:nth-child(2) , .DivTitle span");
+            String title = elements.get(0).text();
+            String date = elements.get(2).text().split(":")[1].substring(1); // it has one space in zero index
 
+            date = date.split("-")[2] + "/" +
+                    date.split("-")[1] + "/" +
+                    date.split("-")[0];
+
+            date = CalendarUtility.getEnglishDate(date);
+            String city;
+            try{
+                //System.out.println(elements.get(3).text());
+                city = elements.get(3).text().split(":")[1].substring(1)
+                        .split("-")[0];
+                if(city.contains(",")){
+                    city = city.substring(1,city.length()-1);
+                }
+            }catch (IndexOutOfBoundsException e){
+                System.out.println("شهر موجود نیست");
+                city = "";
+            }
+            String body = elements.get(4).text();
+            try {
+                feeds.add(new Feed(
+                    title,
+                    body,
+                    city,
+                    URLDecoder.decode(page.getWebURL().toString(), "UTF8"),
+                    date,
+                    Params.DATE_FORMAT_YYYY_MM_DD
+                ));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    @Override
+    public void onBeforeExit() {
+        ExcelUtility.writeToExcel(feeds, Params.SHEET_ESHETAB);
+    }
 }
