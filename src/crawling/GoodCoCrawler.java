@@ -60,12 +60,14 @@ public class GoodCoCrawler extends WebCrawler {
             String date = elements.remove(elements.size()-1).text();
                 System.out.println(date); // TODO
 
+
             date = date.split(" ")[2] + "/" +
                     CalendarUtility.getNumericMonth(date.split(" ")[1]) + "/" +
                     date.split(" ")[0];
-            System.out.println(date);
+
 
             date = CalendarUtility.getEnglishDate(date);
+
 
             /**
              * 3 states exist for remain elements

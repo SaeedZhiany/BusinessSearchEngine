@@ -1,6 +1,6 @@
 package crawling;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+//import com.gargoylesoftware.htmlunit.BrowserVersion;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.url.WebURL;
@@ -10,8 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+//import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -54,17 +53,17 @@ public class ZanjankarCrawler extends WebCrawler {
         );*/
         caps.setBrowserName(DesiredCapabilities.firefox().getBrowserName());
         caps.setVersion(DesiredCapabilities.firefox().getVersion());
-        WebDriver driver = new PhantomJSDriver(caps);
+        //WebDriver driver = new PhantomJSDriver(caps);
         String baseUrl = "http://www.zanjankar.ir/Pages/Joblist.aspx";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get(baseUrl);
+        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+       // driver.get(baseUrl);
 
         // find page number buttons
-        WebElement ul = driver.findElement(By.xpath("./[@id='BodyContentPlaceHolder']/table/tbody/tr/td[1]/div/ul"));
-        List<WebElement> lis = ul.findElements(By.tagName("li"));
+       // WebElement ul = driver.findElement(By.xpath("./[@id='BodyContentPlaceHolder']/table/tbody/tr/td[1]/div/ul"));
+       // List<WebElement> lis = ul.findElements(By.tagName("li"));
 
-        System.out.println(lis.size());/*
-        List<WebElement> elements = new ArrayList<WebElement>();
+        //System.out.println(lis.size());/*
+        /*List<WebElement> elements = new ArrayList<WebElement>();
         for (WebElement button : lis){
             Actions action = new Actions(driver);
             action.moveToElement(button).click();

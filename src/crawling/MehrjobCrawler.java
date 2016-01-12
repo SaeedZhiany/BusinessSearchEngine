@@ -91,7 +91,7 @@ public class MehrjobCrawler extends WebCrawler {
                         title,
                         body,
                         city,
-                        page.getWebURL().toString(),
+                        URLDecoder.decode(page.getWebURL().toString(), "UTF8"),
                         date[2]+"/"+date[1]+"/"+date[0],
                         Params.DATE_FORMAT_YYYY_MM_DD
                 );
