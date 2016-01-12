@@ -85,7 +85,6 @@ public class GoodCoCrawler extends WebCrawler {
                     city = elements.remove(2).text();
                     break;
             }
-
             try {
                 feeds.add(new Feed(
                         title,
