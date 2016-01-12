@@ -6,6 +6,7 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import shared.CalendarUtility;
 import shared.ExcelUtility;
@@ -19,21 +20,21 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
- * Created by SAEED on 2016-01-12
+ * Created by SAEED on 2016-01-13
  * for project BusinessSearchEngine .
  */
 
 /**
  * this class has been write to
- * crawl GoodCo's business feed
+ * crawl Estekhdamia's business feed
  * url is: http://goodco.ir/
- * seed url : http://goodco.ir/opportunities/alphabet
+ * seed url : estekhdamia.ir/category/استخدام/
  */
 
-public class GoodCoCrawler extends WebCrawler {
+public class EstekhdamiaCrawler extends WebCrawler {
 
-    private Pattern filter1 = Pattern.compile("http://goodco\\.ir/opportunity/[0-9]*"); // feeds is here
-    private Pattern filter2 = Pattern.compile("http://goodco\\.ir/opportunities/alphabet\\?page=[0-9]*"); // next page Button
+    private Pattern filter1 = Pattern.compile("estekhdamia\\.ir/.*استخدام.*"); // feeds is here
+    private Pattern filter2 = Pattern.compile("estekhdamia\\.ir/category/استخدام/page/[0-9]*"); // next page Button
     private ArrayList<Feed> feeds = new ArrayList<Feed>();
 
     @Override
@@ -51,14 +52,20 @@ public class GoodCoCrawler extends WebCrawler {
 
     @Override
     public void visit(Page page) {
-        if (!page.getWebURL().getURL().equals("http://goodco.ir/opportunities/alphabet") &&
+        if (!page.getWebURL().getURL().equals("estekhdamia.ir/category/استخدام/") &&
                 !filter2.matcher(page.getWebURL().getURL()).matches()){
             Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
-            Elements elements = doc.select("#about a:nth-child(2) , .released .span7 , #about .heading+ p , h1");
-            String title = elements.remove(0).text(); // title in index 0, body in index 1
+            Elements elements = doc.select(".single .code:nth-child(3) , p:nth-child(3) , .entry-content p , #content p:nth-child(2)");
+            for (Element e:elements){
+                System.out.println(e.text());
+                System.out.println("-------------");
+            }
+            System.out.println();
+
+            /*String title = elements.remove(0).text(); // title in index 0, body in index 1
             String body = elements.remove(0).text(); // now, body in index 0
             String date = elements.remove(elements.size()-1).text();
-                System.out.println(date); // TODO
+            System.out.println(date); // TODO
 
             date = date.split(" ")[2] + "/" +
                     CalendarUtility.getNumericMonth(date.split(" ")[1]) + "/" +
@@ -67,12 +74,12 @@ public class GoodCoCrawler extends WebCrawler {
 
             date = CalendarUtility.getEnglishDate(date);
 
-            /**
+            *//**
              * 3 states exist for remain elements
              * element.size() == 0 : city does not exist
              * element.size() == 1 : city exist in index 0
              * element.size() == 3 : city exist in index 2, index 0 and 1 is empty
-              */
+             *//*
             String city = "";
             switch (elements.size()){
                 case 0:
@@ -97,12 +104,12 @@ public class GoodCoCrawler extends WebCrawler {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
     @Override
     public void onBeforeExit() {
-        ExcelUtility.writeToExcel(feeds, Params.SHEET_GOODCO);
+        ExcelUtility.writeToExcel(feeds, Params.SHEET_ESTEKHDAMIA);
     }
 }
