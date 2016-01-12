@@ -33,8 +33,6 @@ import java.util.regex.Pattern;
  * seed : http://www.ecity24.ir/RJobs.aspx
  */
 public class Ecity24Crawler {
-    Pattern filter = Pattern.compile
-            ("http://www\\.ecity24\\.ir/RJobDetails\\.aspx\\?JobID=.*");
 
     private HtmlUnitDriver driver;
     private ArrayList<Feed> feeds = new ArrayList<Feed>();

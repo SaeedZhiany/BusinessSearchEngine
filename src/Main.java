@@ -45,8 +45,14 @@ public class Main {
             /*controller.addSeed("http://ahwniaz.ir/category/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/");
             controller.start(AhwniazCrawler.class, 1);*/
 
-            Ecity24Crawler crawler = new Ecity24Crawler();
-            crawler.start("http://www.ecity24.ir/RJobs.aspx");
+            /*Ecity24Crawler crawler = new Ecity24Crawler();
+            crawler.start("http://www.ecity24.ir/RJobs.aspx");*/
+
+            /*JobcityCrawler crawler = new JobcityCrawler();
+            crawler.start("http://www.jobcity.ir/");*/
+
+            SabainfoCrawler crawler = new SabainfoCrawler();
+            crawler.start("http://www.sabainfo.ir/fa/ssp/employnotic");
 
             /*controller.addSeed("http://ekaar.ir/joblist.aspx");
             controller.start(EkaarCrawler.class, 1);
