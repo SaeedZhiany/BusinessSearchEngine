@@ -23,7 +23,7 @@ public class Main {
 
 
             /*controller.addSeed("http://job.pnuna.com/");
-            controller.start(PnunaCrawler.class, 1);
+            controller.start(PnunaCrawler.class, 1);*/
 
             /*controller.addSeed("http://www.baroot.com/result/index.php?page=1");
             controller.start(BarootCrawler.class, 1);*/
@@ -46,7 +46,10 @@ public class Main {
             controller.start(AhwniazCrawler.class, 1);
 
             /*controller.addSeed("http://ekaar.ir/joblist.aspx");
-            controller.start(EkaarCrawler.class, 1);*/
+            controller.start(EkaarCrawler.class, 1);
+
+            /*controller.addSeed("http://www.unp.ir/news/job");
+            controller.start(UnpCrawler.class, 1);*/
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -14,6 +14,8 @@ import edu.uci.ics.crawler4j.url.WebURL;
  * crawl jobcity's business feed
  * url is: http://www.jobcity.ir/
  */
+
+//  این سایت Script است
 public class JobcityCrawler extends WebCrawler {
 
     @Override

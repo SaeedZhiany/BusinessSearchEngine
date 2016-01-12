@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 public class LastjobCrawler extends WebCrawler {
 
     private final Pattern filter = Pattern.compile("http://lastjob\\.ir/.*(استخدام|دعوت به همکاری).*/");
-    private final Pattern filter2 = Pattern.compile("http://lastjob\\.ir/category/استخدام-عمومی/page/[0-9]*/");
+    private final Pattern filter2 = Pattern.compile("http://lastjob\\.ir/category/استخدام-عمومی/page/[\\d]+/");
 
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
@@ -50,11 +50,12 @@ public class LastjobCrawler extends WebCrawler {
 
     @Override
     public void visit(Page page) {
-        if(filter2.matcher(page.getWebURL().toString()).matches())
-            return;
-        if (!page.getWebURL().getURL().toLowerCase().equals("http://lastjob.ir/")) {
-            Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
-            Elements elements = doc.select("#single-ul li~ li+ li , #produce+ #single p+ p , #single p a");
+        if(filter2.matcher(page.getWebURL().toString()).matches()){
+            System.out.println("123");
+            return;}
+        else //(!page.getWebURL().getURL().toLowerCase().equals("http://lastjob.ir/")) {
+        {Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
+            Elements elements = doc.select("#single p a");
 
             try {
                 System.out.println("**" + URLDecoder.decode(page.getWebURL().toString(), "UTF8") + "**");
