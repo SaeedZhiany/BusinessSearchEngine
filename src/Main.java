@@ -1,6 +1,5 @@
 import crawling.*;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
-import shared.Params;
 
 /**
  * Created by SAEED on 2016-01-08
@@ -10,7 +9,6 @@ public class Main {
     public static void main(String[] argv){
         try {
             CrawlController controller = BusinessCrawlController.setup();
-
             /*
             controller.addSeed("http://lastjob.ir/category/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B9%D9%85%D9%88%D9%85%DB%8C/");
             controller.start(LastjobCrawler.class, 1);*/
@@ -23,32 +21,32 @@ public class Main {
             controller.addSeed("http://www.aftabir.com/advertising/job.php");
             controller.start(AftabirCrawler.class, 1);*/
 
-            /*
-            controller.addSeed("http://job.pnuna.com");
-            controller.start(PnunaCrawler.class, 1);*/
+
+            /*controller.addSeed("http://job.pnuna.com/");
+            controller.start(PnunaCrawler.class, 1);
 
             /*controller.addSeed("http://www.baroot.com/result/index.php?page=1");
             controller.start(BarootCrawler.class, 1);*/
 
-            /*controller.addSeed("http://www.eshetab.com/");
-            controller.start(EshetabCrawler.class, 1);*/
+            /*controller.addSeed("http://estekhdam.pardad.ir/GA_13.aspx");
+            controller.addSeed("http://estekhdam.pardad.ir/GA_4.aspx");
+            controller.addSeed("http://estekhdam.pardad.ir/GA_2.aspx");
+            controller.addSeed("http://estekhdam.pardad.ir/GA_3.aspx");
+            controller.addSeed("http://estekhdam.pardad.ir/GA_18.aspx");
+            controller.addSeed("http://estekhdam.pardad.ir/GA_17.aspx");
+            controller.addSeed("http://estekhdam.pardad.ir/GA_22.aspx");
+            controller.addSeed("http://estekhdam.pardad.ir/GA_72.aspx");
+            controller.addSeed("http://estekhdam.pardad.ir/news_group.aspx?id=22&a=1&Page=12");
+            controller.start(PardadCrawler.class, 1);*/
 
-            /*controller.addSeed("http://iran-tejarat.com/Cat13/13.html");
-            controller.start(IranTejaratCrawler.class, 1);*/
+            /*controller.addSeed("http://mazandkar.ir");
+            controller.start(MazandkarCrawler.class, 1);*/
 
-            controller.addSeed("http://niazma.ir/listings/category/استخدام-و-کاریابی/");
-            controller.start(NiazmaCrawler.class, 1);
+            controller.addSeed("http://ahwniaz.ir/category/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/");
+            controller.start(AhwniazCrawler.class, 1);
 
-            /*controller.addSeed("http://www.eshetab.com/");
-            controller.start(EshetabCrawler.class, 1);*/
-
-            /*controller.addSeed("http://estekhdamkhabar.com/");
-            controller.start(EstekhdamkhabarCrawler.class, 1);*/
-
-           /* controller.addSeed("http://www.mehrjob.com/");
-            controller.start(MehrjobCrawler.class, 1);*/
-
-
+            /*controller.addSeed("http://ekaar.ir/joblist.aspx");
+            controller.start(EkaarCrawler.class, 1);*/
 
         } catch (Exception e) {
             e.printStackTrace();
