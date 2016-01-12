@@ -32,11 +32,11 @@ public class Main {
             /*controller.addSeed("http://www.eshetab.com/");
             controller.start(EshetabCrawler.class, 1);*/
 
-            /*controller.addSeed("http://estekhdamkhabar.com");
+            /*controller.addSeed("http://estekhdamkhabar.com/");
             controller.start(EstekhdamkhabarCrawler.class, 1);*/
 
-            controller.addSeed("http://www.mehrjob.com/");
-            controller.start(MehrjobCrawler.class, 1);
+           /* controller.addSeed("http://www.mehrjob.com/");
+            controller.start(MehrjobCrawler.class, 1);*/
 
 
 
