@@ -6,13 +6,12 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import shared.CalendarUtility;
 import shared.Feed;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -25,17 +24,20 @@ import java.util.regex.Pattern;
  * crawl AhwniazCrawler's business feed
  * url is: http://ahwniaz.ir/category/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/
  */
+
+//
 public class AhwniazCrawler extends WebCrawler {
 
     private final String DATE_SPLITTER = ": ";
     private final String DATE_DETAIL_SPLITTER = " ";
     private final String CITY_SPLITTER = "شماره تماس";
+    private final String CITY_DATAIL_SPLITTER = " - ";
     private final String ADDRESS = "آدرس:";
     private final String AhwniazDateFormat = "yyyy/mm/dd";
 
     Pattern filter = Pattern.compile("http://ahwniaz\\.ir/category/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/page/[\\d]+/");
     Pattern filter1 = Pattern.compile("^http://ahwniaz\\.ir/.*استخدام.*/");
-    private final ArrayList<Feed> Feed = new ArrayList<shared.Feed>();
+    private final ArrayList<Feed> feeds = new ArrayList<shared.Feed>();
 
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
@@ -48,7 +50,6 @@ public class AhwniazCrawler extends WebCrawler {
             return  false;
         }
     }
-
     @Override
     public void visit(Page page) {
         try {
@@ -63,6 +64,7 @@ public class AhwniazCrawler extends WebCrawler {
 
                 //title
                 String title = doc.select("h1").text().trim();
+                title = title.substring(0, title.length()/2);
 
                 //date
                 String[] date = doc.select(".text-info+ span").text().trim().split(DATE_SPLITTER)[1].split(DATE_DETAIL_SPLITTER);
@@ -71,23 +73,34 @@ public class AhwniazCrawler extends WebCrawler {
                 //city
                 String city = URLDecoder.decode(doc.select(".matn p+ p").text().trim().split(CITY_SPLITTER)[0].split(DATE_SPLITTER)[1], "UTF8");
                 if (URLDecoder.decode(doc.select(".matn p+ p").text().trim().split(CITY_SPLITTER)[0].split(DATE_SPLITTER)[0], "UTF8").contains("ایمیل")
-                || !URLDecoder.decode(doc.select(".matn p+ p").text().trim().split(CITY_SPLITTER)[0].split(DATE_SPLITTER)[0], "UTF8").contains("آدرس"))
-                    city = "";
+                || !URLDecoder.decode(doc.select(".matn p+ p").text().trim().split(CITY_SPLITTER)[0].split(DATE_SPLITTER)[0], "UTF8").contains("آدرس")){System.out.println("no");
+                    city = "نا معلوم";}
+                else{System.out.println("yes");
+                     city = city.split(URLDecoder.decode(" – ", "UTF8"))[0];}
 
                 //body
                 String body = doc.select(".matn p:nth-child(2) , .ad-body p:nth-child(1)").text().trim();
                 if (body.isEmpty())
                     body = doc.select(".ad-body p").text().trim();
 
-                //for (Element element : elements){
-                    System.out.println(city.toString());
-                    System.out.println("+++++++");
-                //}
-
+                Feed feed = new Feed(
+                        title,
+                        body,
+                        city,
+                        page.getWebURL().toString(),
+                        date[2] + "/" + date[1] + "/" + date[0],
+                        AhwniazDateFormat
+                );
+                feeds.add(feed);
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
+    }
+    @Override
+    public void onBeforeExit() {
+        super.onBeforeExit();
     }
 }

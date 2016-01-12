@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
@@ -46,10 +47,12 @@ public class UnpCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
 
-        if (page.getWebURL().getURL().equals("http://www.unp.ir/news/job"))
-            return;
+        if (page.getWebURL().getURL().equals("http://www.unp.ir/news/job")){
+            System.out.println("123");
+            return;}
 
         else if (page.getWebURL().getURL().matches("http://www\\.unp\\.ir/news/job\\?page=[\\d]+")) {
+            System.out.println("789");
             return;
         }
 
@@ -58,11 +61,15 @@ public class UnpCrawler extends WebCrawler {
                 System.out.println(URLDecoder.decode(page.getWebURL().getURL(), "UTF8"));
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
                 Elements elements = doc.select
-                        ("p font , .dirs:nth-child(2) , .newstitle a");
+                        (".one_one:nth-child(1) div:nth-child(1)");
+                ArrayList<String> al = new ArrayList<String>();
                 for (Element element : elements) {
-                    System.out.println(element.text());
-                    System.out.println("==========");
+                    //System.out.println(element.text());
+                    al.add(element.text().trim());
                 }
+                for (int i = 0;i<al.size();i++){
+                    System.out.println(i + " : " + al.get(i).toString());
+                System.out.println("==========");}
             } catch (UnsupportedEncodingException ex) {
                 ex.printStackTrace();
             }
