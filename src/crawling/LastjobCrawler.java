@@ -56,14 +56,14 @@ public class LastjobCrawler extends WebCrawler {
             Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
             Elements elements = doc.select("#single-ul li~ li+ li , #produce+ #single p+ p , #single p a");
 
+            try {
+                System.out.println("**" + URLDecoder.decode(page.getWebURL().toString(), "UTF8") + "**");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             for (Element element: elements){
-                try {
-                    System.out.println("**" + URLDecoder.decode(page.getWebURL().toString(), "UTF8") + "**");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
                 System.out.println(element.text());
-                System.out.println();
+                System.out.println("---------------------");
             }
         }
     }

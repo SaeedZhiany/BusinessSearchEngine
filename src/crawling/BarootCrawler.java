@@ -72,11 +72,13 @@ public class BarootCrawler extends WebCrawler {
                         title,
                         body,
                         city,
-                        URLDecoder.decode(page.getWebURL().toString()),
+                        URLDecoder.decode(page.getWebURL().toString(), "UTF8"),
                         date,
                         Params.DATE_FORMAT_YYYY_MM_DD
                 ));
             } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
 

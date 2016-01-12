@@ -1,5 +1,6 @@
 import crawling.*;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
+import shared.Params;
 
 /**
  * Created by SAEED on 2016-01-08
@@ -28,6 +29,15 @@ public class Main {
 
             /*controller.addSeed("http://www.baroot.com/result/index.php?page=1");
             controller.start(BarootCrawler.class, 1);*/
+
+            /*controller.addSeed("http://www.eshetab.com/");
+            controller.start(EshetabCrawler.class, 1);*/
+
+            /*controller.addSeed("http://iran-tejarat.com/Cat13/13.html");
+            controller.start(IranTejaratCrawler.class, 1);*/
+
+            controller.addSeed("http://niazma.ir/listings/category/استخدام-و-کاریابی/");
+            controller.start(NiazmaCrawler.class, 1);
 
             /*controller.addSeed("http://www.eshetab.com/");
             controller.start(EshetabCrawler.class, 1);*/
