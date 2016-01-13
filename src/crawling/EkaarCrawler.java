@@ -37,7 +37,7 @@ public class EkaarCrawler extends WebCrawler {
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         try {
-            String href = url.getURL().toLowerCase();
+            String href = url.getURL();
             String decodedString = URLDecoder.decode(href, "UTF8");
             return  filter.matcher(decodedString).matches() ||
                     filter1.matcher(decodedString).matches();
@@ -48,9 +48,9 @@ public class EkaarCrawler extends WebCrawler {
     }
     @Override
     public void visit(Page page) {
-        if (page.getWebURL().getURL().toLowerCase().equals("http://ekaar.ir/joblist.aspx"))
+        if (page.getWebURL().getURL().equals("http://ekaar.ir/joblist.aspx"))
             return;
-        if (page.getWebURL().getURL().toLowerCase().matches("http://ekaar\\.ir/joblist\\.aspx?page=[\\d]+"))
+        if (page.getWebURL().getURL().matches("http://ekaar\\.ir/joblist\\.aspx?page=[\\d]+"))
             return;
         else {
             Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());

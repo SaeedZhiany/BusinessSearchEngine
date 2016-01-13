@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Created by Mostafa on 1/11/2016.
@@ -31,13 +32,16 @@ public class MazandkarCrawler extends WebCrawler{
     private final String MazanKarDateFormat = "yyyy/mm/dd";
     private final ArrayList<Feed> feeds = new ArrayList<Feed>();
 
+    Pattern filter = Pattern.compile("http://mazandkar\\.ir/index\\.php/site/index\\?(NewsModel|Addjob)_page=[\\d]+.*");
+    Pattern filter1 = Pattern.compile("http://mazandkar\\.ir/index\\.php/user/viewj/.*");
+    Pattern filter2 = Pattern.compile("http://mazandkar\\.ir/index\\.php.*");
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         try {
-            String href = url.getURL().toLowerCase();
+            String href = url.getURL();
             String decodeString = URLDecoder.decode(href, "UTF8");
-            return decodeString.startsWith("http://mazandkar.ir/index.php/user/viewj/") ||
-            decodeString.matches("http://mazandkar\\.ir/index\\.php/site/index?Addjob_page=[\\d]+&ajax=yw0&language=fa");
+            return filter1.matcher(decodeString).matches() ||
+            filter.matcher(decodeString).matches();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return false;
@@ -47,11 +51,9 @@ public class MazandkarCrawler extends WebCrawler{
     @Override
     public void visit(Page page) {
         try {
-            if (URLDecoder.decode(page.getWebURL().getURL(), "UTF8").toLowerCase().equals("http://mazandkar.ir")){
-                System.out.println("123");
+            if (page.getWebURL().getURL().equals("http://mazandkar.ir/")){
                 return;}
-            if (page.getWebURL().getURL().toLowerCase().matches("http://mazandkar\\.ir/index\\.php/site/index?Addjob_page=[\\d]+&ajax=yw0&language=fa")){
-                System.out.println("");
+            if (filter.matcher(URLDecoder.decode(page.getWebURL().toString(), "UTF8")).matches()){
                 return;}
             else {
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
@@ -71,7 +73,7 @@ public class MazandkarCrawler extends WebCrawler{
 
                 //city
                 String city = elements.get(0).text().trim();
-
+                System.out.println(title +"\t"+city+"\t"+date[2]+"/"+date[1]+"/"+date[0]);
                 try {
                     Feed feed = new Feed(
                             title,

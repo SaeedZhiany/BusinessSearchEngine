@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
  * crawl zanjankar's business feed
  * url is: http://www.zanjankar.ir/Pages/Joblist.aspx
  */
-public class ZanjankarCrawler extends WebCrawler {
+public class ZanjankarCrawler_Faulty extends WebCrawler {
 
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {

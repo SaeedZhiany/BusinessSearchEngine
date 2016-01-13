@@ -15,7 +15,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
  * url is: http://www.karyabisazandegi.ir/portal/
  */
 
-public class karyabisazandegiCrawler extends WebCrawler {
+public class karyabisazandegiCrawler_Faulty extends WebCrawler {
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         return super.shouldVisit(referringPage, url);

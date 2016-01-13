@@ -8,7 +8,7 @@ import edu.uci.ics.crawler4j.crawler.CrawlController;
 public class Main {
     public static void main(String[] argv){
         try {
-            CrawlController controller = BusinessCrawlController.setup();
+            //CrawlController controller = BusinessCrawlController.setup();
             /*
             controller.addSeed("http://lastjob.ir/category/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B9%D9%85%D9%88%D9%85%DB%8C/");
             controller.start(LastjobCrawler.class, 1);*/
@@ -54,6 +54,11 @@ public class Main {
             /*SabainfoCrawler crawler = new SabainfoCrawler();
             crawler.start("http://www.sabainfo.ir/fa/ssp/employnotic");*/
 
+            /*controller.addSeed("http://ahwniaz.ir/category/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/");
+            controller.start(AhwniazCrawler.class, 1);*/
+            /*SabainfoCrawler crawler = new SabainfoCrawler();
+            crawler.start("http://www.sabainfo.ir/fa/ssp/employnotic");*/
+
             /*controller.addSeed("http://ekaar.ir/joblist.aspx");
             controller.start(EkaarCrawler.class, 1);
 
@@ -65,6 +70,9 @@ public class Main {
 
             controller.addSeed("estekhdamia.ir/category/استخدام/");
             controller.start(EstekhdamiaCrawler.class, 1);
+
+            controller.addSeed("http://job.mida-co.ir/");
+            controller.start(GoodcoCrawler.class, 1);
 
         } catch (Exception e) {
             e.printStackTrace();
