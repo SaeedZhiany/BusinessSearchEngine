@@ -45,7 +45,7 @@ public class IstgahCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         if (page.getWebURL().toString().equals("http://www.istgah.com/fireview/kid_318/") ||
-            filter1.matcher(page.getWebURL().toString()).matches()){System.out.println("123");
+            filter1.matcher(page.getWebURL().toString()).matches()){
             return;
         }
         Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
