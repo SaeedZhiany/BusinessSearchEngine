@@ -6,7 +6,6 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import shared.Feed;
 
@@ -71,10 +70,6 @@ public class EkaarCrawler extends WebCrawler {
             //title
             String date = elements.get(0).text().trim().split(DATE_DETAIL_SPLITTER)[1];
 
-            for (Element element : elements) {
-                System.out.println(date);
-                System.out.println("+++++++");
-            }
             try {
                 Feed feed = new Feed(
                         title,
