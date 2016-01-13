@@ -83,6 +83,9 @@ public class Main {
             /*controller.addSeed("http://www.bazarekariran.ir/employer-adver.php");
             controller.start(BazareKarIranCrawler.class, 1);*/
 
+            controller.addSeed("http://www.jazbeniru.com/job_posting/reputable_company/%D8%A2%DA%AF%D9%87%DB%8C-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D8%B1%DA%A9%D8%AA-%D9%87%D8%A7%DB%8C-%D9%85%D8%B9%D8%AA%D8%A8%D8%B1.aspx");
+            controller.start(JazbeNiru.class, 1);
+
         } catch (Exception e) {
             e.printStackTrace();
             //System.out.println(e.getMessage());
