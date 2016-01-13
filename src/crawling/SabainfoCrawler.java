@@ -1,21 +1,13 @@
 package crawling;
 
-import edu.uci.ics.crawler4j.crawler.Page;
-import edu.uci.ics.crawler4j.crawler.WebCrawler;
-import edu.uci.ics.crawler4j.parser.HtmlParseData;
-import edu.uci.ics.crawler4j.url.WebURL;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.interactions.Actions;
 import shared.Feed;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 /**
  * Created by SAEED on 2016-01-07

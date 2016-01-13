@@ -6,7 +6,6 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import shared.ExcelUtility;
 import shared.Feed;
@@ -16,8 +15,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,7 +28,7 @@ import java.util.regex.Pattern;
  * url is: http://www.jazbeniru.com/
  * seed url : http://www.jazbeniru.com/job_posting/reputable_company/%D8%A2%DA%AF%D9%87%DB%8C-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D8%B1%DA%A9%D8%AA-%D9%87%D8%A7%DB%8C-%D9%85%D8%B9%D8%AA%D8%A8%D8%B1.aspx
  */
-public class JazbeNiru extends WebCrawler {
+public class JazbeNiruCrawler extends WebCrawler {
 
     private Pattern filter1 =
             Pattern.compile("http://www\\.jazbeniru\\.com/[0-9]*/.*\\.aspx"); // feeds is here

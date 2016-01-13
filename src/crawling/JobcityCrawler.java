@@ -3,11 +3,8 @@ package crawling;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
-import shared.ExcelUtility;
 import shared.Feed;
-import shared.Params;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
