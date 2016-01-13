@@ -72,7 +72,7 @@ public class MehrjobCrawler extends WebCrawler {
 
                 String title = elements.get(0).text();
 
-                String city = "";
+                String city = "نامعلوم";
                 for (String c: Params.citiesList) {
                     if (title.contains(c)) {
                         city = c;
