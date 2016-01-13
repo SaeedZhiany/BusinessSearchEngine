@@ -63,7 +63,7 @@ public class Main {
             /*controller.addSeed("http://goodco.ir/opportunities/alphabet");
             controller.start(GoodCoCrawler.class, 1);*/
 
-            controller.addSeed("estekhdamia.ir/category/استخدام/");
+            controller.addSeed("http://estekhdamia.ir/category/استخدام/");
             controller.start(EstekhdamiaCrawler.class, 1);
 
         } catch (Exception e) {
