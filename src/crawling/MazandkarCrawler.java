@@ -1,13 +1,11 @@
 package crawling;
 
-import com.coremedia.iso.Utf8;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import shared.Feed;
 
@@ -34,7 +32,7 @@ public class MazandkarCrawler extends WebCrawler{
 
     Pattern filter = Pattern.compile("http://mazandkar\\.ir/index\\.php/site/index\\?(NewsModel|Addjob)_page=[\\d]+.*");
     Pattern filter1 = Pattern.compile("http://mazandkar\\.ir/index\\.php/user/viewj/.*");
-    Pattern filter2 = Pattern.compile("http://mazandkar\\.ir/index\\.php.*");
+
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         try {
@@ -73,7 +71,7 @@ public class MazandkarCrawler extends WebCrawler{
 
                 //city
                 String city = elements.get(0).text().trim();
-                System.out.println(title +"\t"+city+"\t"+date[2]+"/"+date[1]+"/"+date[0]);
+
                 try {
                     Feed feed = new Feed(
                             title,
