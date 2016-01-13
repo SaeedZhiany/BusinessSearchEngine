@@ -9,6 +9,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import shared.ExcelUtility;
 import shared.Feed;
 import shared.Params;
 
@@ -103,6 +104,6 @@ public class Golestan118Crawler extends WebCrawler {
 
     @Override
     public void onBeforeExit() {
-        super.onBeforeExit();
+        ExcelUtility.writeToExcel(feeds, Params.SHEET_GOLESTAN118);
     }
 }

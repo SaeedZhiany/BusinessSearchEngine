@@ -7,7 +7,9 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import shared.ExcelUtility;
 import shared.Feed;
+import shared.Params;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -32,7 +34,7 @@ public class EkaarCrawler extends WebCrawler {
     Pattern filter = Pattern.compile("http://ekaar\\.ir/joblist\\.aspx?page=[\\d]+");
     Pattern filter1 = Pattern.compile("http://ekaar\\.ir/job-[\\d]+\\..*");
 
-    private final ArrayList<Feed> Feed = new ArrayList<shared.Feed>();
+    private final ArrayList<Feed> feeds = new ArrayList<shared.Feed>();
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         try {
@@ -78,7 +80,7 @@ public class EkaarCrawler extends WebCrawler {
                         page.getWebURL().toString(),
                         date,
                         ekaarDateFormat);
-                Feed.add(feed);
+                feeds.add(feed);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -86,6 +88,6 @@ public class EkaarCrawler extends WebCrawler {
     }
     @Override
     public void onBeforeExit() {
-        super.onBeforeExit();
+        ExcelUtility.writeToExcel(feeds, Params.SHEET_EKAAR);
     }
 }

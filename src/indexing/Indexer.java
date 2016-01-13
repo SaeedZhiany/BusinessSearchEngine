@@ -59,14 +59,17 @@ public class Indexer {
         // index feed body
         TextField body = new TextField(Params.FIELD_BODY, feed.getBody(), Field.Store.YES);
         // index feed body
-        StringField city = new StringField(Params.FIELD_CITY, feed.getBody(), Field.Store.YES);
+        TextField city = new TextField(Params.FIELD_CITY, feed.getBody(), Field.Store.YES);
         // index feed body
         TextField date = new TextField(Params.FIELD_DATE, feed.getBody(), Field.Store.YES);
+
+        StringField url = new StringField(Params.FIELD_URL, feed.getUrl(), Field.Store.YES);
 
         document.add(title);
         document.add(body);
         document.add(city);
         document.add(date);
+        document.add(url);
 
         return document;
     }

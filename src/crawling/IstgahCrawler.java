@@ -8,6 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import shared.CalendarUtility;
+import shared.ExcelUtility;
 import shared.Feed;
 import shared.Params;
 
@@ -90,6 +91,6 @@ public class IstgahCrawler extends WebCrawler {
 
     @Override
     public void onBeforeExit() {
-        super.onBeforeExit();
+        ExcelUtility.writeToExcel(feeds, Params.SHEET_ISTGAH);
     }
 }

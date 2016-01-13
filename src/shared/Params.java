@@ -22,7 +22,7 @@ public class Params {
     public static final int MAX_DEPTH_OF_CRAWLING = -1;
     public static final int MAX_PAGES_TO_FETCH = -1;
 
-    public static final int SHEET_COUNT = 20;
+    public static final int SHEET_COUNT = 30;
 
     public static final int SHEET_Jobcity = 0;
     public static final int SHEET_ESHETAB = 1;
@@ -49,11 +49,17 @@ public class Params {
     public static final int SHEET_ESTEKHDAM24 = 22;
     public static final int SHEET_BAZAREKARIRAN = 23;
     public static final int SHEET_JAZBENIRO = 24;
+    public static final int SHEET_AHWNIAZ = 25;
+    public static final int SHEET_EKAAR = 26;
+    public static final int SHEET_GOLESTAN118 = 27;
+    public static final int SHEET_ISTGAH = 28;
+    public static final int SHEET_MAZANDKAR = 29;
 
     public static final String FIELD_TITLE = "title";
     public static final String FIELD_BODY = "body";
     public static final String FIELD_CITY = "city";
     public static final String FIELD_DATE = "date";
+    public static final String FIELD_URL = "url";
 
     public static ArrayList<String> citiesList = new ArrayList<String>(Arrays.asList(
             "اسكو",

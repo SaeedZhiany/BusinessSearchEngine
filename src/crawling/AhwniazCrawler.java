@@ -7,7 +7,9 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import shared.CalendarUtility;
+import shared.ExcelUtility;
 import shared.Feed;
+import shared.Params;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -53,11 +55,9 @@ public class AhwniazCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         try {
-            if (URLDecoder.decode(page.getWebURL().getURL().toString(), "UTF8").toLowerCase().equals("http://ahwniaz.ir/category/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/")){
-                System.out.println("123");
+            if (URLDecoder.decode(page.getWebURL().getURL(), "UTF8").toLowerCase().equals("http://ahwniaz.ir/category/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/")){
                 return;}
             if (filter.matcher(URLDecoder.decode(page.getWebURL().getURL(), "UTF8")).matches()){
-                System.out.println("789");
                 return;}
             else {
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
@@ -68,7 +68,7 @@ public class AhwniazCrawler extends WebCrawler {
 
                 //date
                 String[] date = doc.select(".text-info+ span").text().trim().split(DATE_SPLITTER)[1].split(DATE_DETAIL_SPLITTER);
-                date[1] = CalendarUtility.getNumericMonth(date[1]).toString(); // convert alphabet month to numeric
+                date[1] = CalendarUtility.getNumericMonth(date[1]); // convert alphabet month to numeric
 
                 //city
                 String city = URLDecoder.decode(doc.select(".matn p+ p").text().trim().split(CITY_SPLITTER)[0].split(DATE_SPLITTER)[1], "UTF8");
@@ -101,6 +101,6 @@ public class AhwniazCrawler extends WebCrawler {
     }
     @Override
     public void onBeforeExit() {
-        super.onBeforeExit();
+        ExcelUtility.writeToExcel(feeds, Params.SHEET_AHWNIAZ);
     }
 }

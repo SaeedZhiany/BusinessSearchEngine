@@ -7,7 +7,9 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import shared.ExcelUtility;
 import shared.Feed;
+import shared.Params;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -89,5 +91,10 @@ public class MazandkarCrawler extends WebCrawler{
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBeforeExit() {
+        ExcelUtility.writeToExcel(feeds, Params.SHEET_MAZANDKAR);
     }
 }
