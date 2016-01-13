@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 /**
  * this class has been write to
  * crawl Estekhdamia's business feed
- * url is: http://goodco.ir/
+ * url is: http://estekhdamia.ir/
  * seed url : http://estekhdamia.ir/category/استخدام/
  */
 
