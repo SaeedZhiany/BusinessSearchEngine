@@ -6,6 +6,7 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import shared.Feed;
 
@@ -48,7 +49,12 @@ public class IstgahCrawler extends WebCrawler {
             return;
         }
         Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
-        Elements elements = doc.select("");
+        Elements elements = doc.select(".avp p , .uinfo , dd:nth-child(10) , h1");
+
+        for (Element element : elements){
+            System.out.println(element.text());
+            System.out.println("+++++++++++");
+        }
     }
 
     @Override

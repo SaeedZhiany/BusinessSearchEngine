@@ -71,8 +71,11 @@ public class Main {
             /*controller.addSeed("http://estekhdamia.ir/category/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/");
             controller.start(EstekhdamiaCrawler.class, 1);*/
 
-            controller.addSeed("http://www.golestan118.com/Hire");
-            controller.start(Golestan118Crawler.class, 1);
+            /*controller.addSeed("http://www.golestan118.com/Hire");
+            controller.start(Golestan118Crawler.class, 1);*/
+
+            controller.addSeed("http://www.istgah.com/fireview/kid_318/");
+            controller.start(IstgahCrawler.class, 1);
 
         } catch (Exception e) {
             e.printStackTrace();
