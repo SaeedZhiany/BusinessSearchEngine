@@ -147,7 +147,4 @@ public class Searcher {
         return results;
     }
 
-    public static void main(String[] arg){
-
-    }
 }
