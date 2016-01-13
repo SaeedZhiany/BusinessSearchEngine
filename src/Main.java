@@ -80,6 +80,9 @@ public class Main {
             /*controller.addSeed("http://www.istgah.com/fireview/kid_318/");
             controller.start(IstgahCrawler.class, 1);*/
 
+            /*controller.addSeed("http://www.bazarekariran.ir/employer-adver.php");
+            controller.start(BazareKarIranCrawler.class, 1);*/
+
         } catch (Exception e) {
             e.printStackTrace();
             //System.out.println(e.getMessage());
