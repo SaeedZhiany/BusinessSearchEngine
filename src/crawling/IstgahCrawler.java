@@ -6,12 +6,14 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import shared.CalendarUtility;
 import shared.Feed;
+import shared.Params;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -26,16 +28,18 @@ import java.util.regex.Pattern;
  */
 public class IstgahCrawler extends WebCrawler {
 
-    Pattern filter = Pattern.compile("http://www\\.istgah\\.com/fireview/kid_318/page_[\\d]*/[\\d]*");
-    Pattern filter1 = Pattern.compile("http://www\\.istgah\\.com/fireview/kid_318/page_[\\d]+/");
+    private final String CITY_NOT_FOUND = "نامعلوم";
+    Pattern filter = Pattern.compile("http://www\\.istgah\\.com/fireview/kid_318/page_[\\d]+/[\\d]+\\.html");
+    Pattern filter1 = Pattern.compile("http://www\\.istgah\\.com/fireview/kid_318/page_[\\d]*/");
 
     private final ArrayList<Feed> feeds = new ArrayList<Feed>();
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         try {
-            String href = url.getURL().toString();
+            String href = url.getURL();
             String decodedString = URLDecoder.decode(href, "UTF8");
-            return filter.matcher(decodedString).matches();
+            return filter.matcher(decodedString).matches() ||
+                    filter1.matcher(decodedString).matches();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return false;
@@ -45,15 +49,42 @@ public class IstgahCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         if (page.getWebURL().toString().equals("http://www.istgah.com/fireview/kid_318/") ||
-            filter1.matcher(page.getWebURL().toString()).matches()){
+                filter1.matcher(page.getWebURL().toString()).matches()){
             return;
         }
         Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
         Elements elements = doc.select(".avp p , .uinfo , dd:nth-child(10) , h1");
 
-        for (Element element : elements){
-            System.out.println(element.text());
-            System.out.println("+++++++++++");
+        //title
+        String title = elements.get(0).text().trim();
+        elements.remove(elements.get(0));
+
+        //city
+        String city = elements.get(elements.size()-1).text().trim();
+        if (city.equals(""))
+            city = CITY_NOT_FOUND;
+        elements.remove(elements.get(elements.size()-1));
+
+        //body
+        String body = elements.get(elements.size()-1).text().trim();
+        elements.remove(elements.size()-1);
+
+        //date
+        String[] date = elements.text().trim().split("،")[1].split(" ");
+        date[2] = CalendarUtility.getNumericMonth(date[2]); // convert alphabet month to numeric
+
+        try {
+            Feed feed = new Feed(
+                    title,
+                    body,
+                    city,
+                    page.getWebURL().toString(),
+                    date[3]+"/"+date[2]+"/"+date[1],
+                    Params.DATE_FORMAT_YYYY_MM_DD
+            );
+            feeds.add(feed);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
