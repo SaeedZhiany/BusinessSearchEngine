@@ -58,7 +58,7 @@ public class GoodCoCrawler extends WebCrawler {
             String title = elements.remove(0).text(); // title in index 0, body in index 1
             String body = elements.remove(0).text(); // now, body in index 0
             String date = elements.remove(elements.size()-1).text();
-                System.out.println(date); // TODO
+            System.out.println(date); // TODO
 
 
             date = date.split(" ")[2] + "/" +
@@ -74,7 +74,7 @@ public class GoodCoCrawler extends WebCrawler {
              * element.size() == 0 : city does not exist
              * element.size() == 1 : city exist in index 0
              * element.size() == 3 : city exist in index 2, index 0 and 1 is empty
-              */
+             */
             String city = "";
             switch (elements.size()){
                 case 0:

@@ -54,6 +54,11 @@ public class Main {
             /*SabainfoCrawler crawler = new SabainfoCrawler();
             crawler.start("http://www.sabainfo.ir/fa/ssp/employnotic");*/
 
+            /*controller.addSeed("http://ahwniaz.ir/category/%D8%A2%DA%AF%D9%87%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/");
+            controller.start(AhwniazCrawler.class, 1);*/
+            /*SabainfoCrawler crawler = new SabainfoCrawler();
+            crawler.start("http://www.sabainfo.ir/fa/ssp/employnotic");*/
+
             /*controller.addSeed("http://ekaar.ir/joblist.aspx");
             controller.start(EkaarCrawler.class, 1);
 
@@ -63,8 +68,11 @@ public class Main {
             /*controller.addSeed("http://goodco.ir/opportunities/alphabet");
             controller.start(GoodCoCrawler.class, 1);*/
 
-            controller.addSeed("http://estekhdamia.ir/category/استخدام/");
-            controller.start(EstekhdamiaCrawler.class, 1);
+            /*controller.addSeed("http://estekhdamia.ir/category/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/");
+            controller.start(EstekhdamiaCrawler.class, 1);*/
+
+            controller.addSeed("http://www.golestan118.com/Hire");
+            controller.start(Golestan118Crawler.class, 1);
 
         } catch (Exception e) {
             e.printStackTrace();
