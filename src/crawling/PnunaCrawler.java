@@ -61,7 +61,6 @@ public class PnunaCrawler extends WebCrawler {
                 return;
             }
             else if (filter1.matcher(URLDecoder.decode(page.getWebURL().getURL(), "UTF8")).matches()) {
-                System.out.println(page.getWebURL().toString());
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
                 Elements elements1 = doc.select(".post-info li:nth-child(2) , .box-top a");
                 Elements elements2 = doc.select(".post-info1 li:nth-child(1) a");
@@ -83,7 +82,7 @@ public class PnunaCrawler extends WebCrawler {
                         (dates[0].length() == 1?"0":"") +
                         dates[0];
                 date = CalendarUtility.getEnglishDate(date);
-                System.out.println(date);
+
                 elements1.remove(elements1.get(elements1.size() - 1));
 
                 //body
