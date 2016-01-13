@@ -83,8 +83,7 @@ public class EshetabCrawler extends WebCrawler {
                     city = city.substring(1,city.length()-1);
                 }
             }catch (IndexOutOfBoundsException e){
-                System.out.println("شهر موجود نیست");
-                city = "";
+                city = "نامعلوم";
             }
             String body = elements.get(4).text();
             try {
