@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
  * this class has been write to
  * crawl mehrjob's business feed
  * url is: http://www.mehrjob.com/
+ * seed is: http://www.mehrjob.com/
  */
 public class MehrjobCrawler extends WebCrawler {
     Pattern filter1 = Pattern.compile
@@ -34,7 +35,7 @@ public class MehrjobCrawler extends WebCrawler {
     Pattern filter2 = Pattern.compile
             ("http://www\\.mehrjob\\.com/page/[\\d]+/");
 
-    private ArrayList<Feed> feeds;
+    private ArrayList<Feed> feeds = new ArrayList<Feed>();
 
 
     @Override
@@ -64,7 +65,6 @@ public class MehrjobCrawler extends WebCrawler {
             else if (filter2.matcher(page.getWebURL().getURL()).matches()) {
                 return;
             } else {
-
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
                 Elements elements = doc.select
                         (".blog-post p:nth-child(1) , .blog-post-meta , .blog-post-title");
@@ -79,10 +79,10 @@ public class MehrjobCrawler extends WebCrawler {
                     }
                 }
 
-
-                String[] date = elements.get(1).text().split(" ");
-                date[1] = CalendarUtility.getNumericMonth(date[1]).toString();
-
+                String[] dates = elements.get(1).text().split(" ");
+                dates[1] = CalendarUtility.getNumericMonth(dates[1]);
+                String date = dates[2]+"/"+dates[1]+"/"+dates[0];
+                date = CalendarUtility.getEnglishDate(date);
 
                 String body = elements.get(2).text();
 
@@ -91,7 +91,7 @@ public class MehrjobCrawler extends WebCrawler {
                         body,
                         city,
                         URLDecoder.decode(page.getWebURL().toString(), "UTF8"),
-                        date[2]+"/"+date[1]+"/"+date[0],
+                        date,
                         Params.DATE_FORMAT_YYYY_MM_DD
                 );
                 feeds.add(feed);
