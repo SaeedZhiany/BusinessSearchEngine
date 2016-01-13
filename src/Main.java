@@ -71,14 +71,14 @@ public class Main {
             /*controller.addSeed("http://estekhdamia.ir/category/استخدام/");
             controller.start(EstekhdamiaCrawler.class, 1);*/
 
-            controller.addSeed("http://estekhdam24.com/");
-            controller.start(Estekhdam24Crawler.class, 1);
+            /*controller.addSeed("http://estekhdam24.com/");
+            controller.start(Estekhdam24Crawler.class, 1);*/
             
             /*controller.addSeed("http://www.golestan118.com/Hire");
             controller.start(Golestan118Crawler.class, 1);*/
 
-            controller.addSeed("http://www.istgah.com/fireview/kid_318/");
-            controller.start(IstgahCrawler.class, 1);
+            /*controller.addSeed("http://www.istgah.com/fireview/kid_318/");
+            controller.start(IstgahCrawler.class, 1);*/
 
         } catch (Exception e) {
             e.printStackTrace();
