@@ -19,8 +19,8 @@ public class Params {
     public static final String PATH_INDEX = ".\\.\\outputIndex";
 
     public static final int POLITENESS_DELAY = 200;
-    public static final int MAX_DEPTH_OF_CRAWLING = -1;
-    public static final int MAX_PAGES_TO_FETCH = -1;
+    public static final int MAX_DEPTH_OF_CRAWLING = 30;
+    public static final int MAX_PAGES_TO_FETCH = 500;
 
     public static final int SHEET_COUNT = 30;
 
