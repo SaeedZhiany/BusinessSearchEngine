@@ -8,7 +8,7 @@ import edu.uci.ics.crawler4j.crawler.CrawlController;
 public class Main {
     public static void main(String[] argv){
         try {
-            //CrawlController controller = BusinessCrawlController.setup();
+            CrawlController controller = BusinessCrawlController.setup();
             /*
             controller.addSeed("http://lastjob.ir/category/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B9%D9%85%D9%88%D9%85%DB%8C/");
             controller.start(LastjobCrawler.class, 1);*/
@@ -68,11 +68,11 @@ public class Main {
             /*controller.addSeed("http://goodco.ir/opportunities/alphabet");
             controller.start(GoodCoCrawler.class, 1);*/
 
-            controller.addSeed("http://estekhdamia.ir/category/استخدام/");
-            controller.start(EstekhdamiaCrawler.class, 1);
+            /*controller.addSeed("http://estekhdamia.ir/category/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85/");
+            controller.start(EstekhdamiaCrawler.class, 1);*/
 
-            controller.addSeed("http://job.mida-co.ir/");
-            controller.start(GoodcoCrawler.class, 1);
+            controller.addSeed("http://www.golestan118.com/Hire");
+            controller.start(Golestan118Crawler.class, 1);
 
         } catch (Exception e) {
             e.printStackTrace();
