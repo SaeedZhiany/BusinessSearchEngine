@@ -46,6 +46,7 @@ public class Params {
     public static final int SHEET_ECITY24 = 19;
     public static final int SHEET_GOODCO = 20;
     public static final int SHEET_ESTEKHDAMIA = 21;
+    public static final int SHEET_ESTEKHDAM24 = 22;
 
     public static final String FIELD_TITLE = "title";
     public static final String FIELD_BODY = "body";
