@@ -74,9 +74,15 @@ public class AftabirCrawler extends WebCrawler {
 
             // date normalization
             date = date.split(" : ")[1]; // آخرین بروزرسانی : شنبه ۲۸ آذر ۱۳۹۴
-            date = date.split(" ")[3] + "/" +
-                    CalendarUtility.getNumericMonth(date.split(" ")[2]) + "/" +
-                    date.split(" ")[1];
+            // بعضی جاها تاریخ اینجوریه :
+            // آخرین بروزرسانی : سه شنبه ۲۸ آذر ۱۳۹۴
+            // همین باعث مشکل شده بود محبور شدیم تاریخو از آخر بخونیم بیایم اول
+
+            final int lastTokenIndex = date.split(" ").length - 1;
+            date = date.split(" ")[lastTokenIndex] + "/" +
+                    CalendarUtility.getNumericMonth(date.split(" ")[lastTokenIndex-1]) + "/" +
+                    (date.split(" ")[lastTokenIndex-2].length() == 1? "0" : "") +
+                    date.split(" ")[lastTokenIndex-2];
             date = CalendarUtility.getEnglishDate(date);
 
             // city normalization
@@ -103,6 +109,6 @@ public class AftabirCrawler extends WebCrawler {
 
     @Override
     public void onBeforeExit() {
-        ExcelUtility.writeToExcel(feeds, Params.SHEET_AFTABIR);
+        //ExcelUtility.writeToExcel(feeds, Params.SHEET_AFTABIR);
     }
 }
