@@ -36,16 +36,20 @@ public class NiazmaCrawler extends WebCrawler {
     private final Pattern filter1 = Pattern.compile("http://niazma\\.ir/listings/.*/"); // content is here
     private final Pattern filter2 = Pattern.compile("http://niazma\\.ir/listings/category/.*/"); // should visit
     private final Pattern filter3 = Pattern.compile("http://niazma\\.ir/listings/category/.*/page/[0-9]+"); // should visit
-    private ArrayList<Feed> feeds;
+    private final Pattern filter4 = Pattern.compile("http://niazma\\.ir/listings/tag/.*/"); // should not visit
+    private final Pattern filter5 = Pattern.compile("http://niazma\\.ir/listings/.*/feed/"); // should not visit
+    private ArrayList<Feed> feeds = new ArrayList<Feed>();
 
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         try {
             String href = url.getURL().toLowerCase();
             String decodedString = URLDecoder.decode(href, "UTF8");
-            return filter1.matcher(decodedString).matches() ||
+            return (filter1.matcher(decodedString).matches() ||
                     filter2.matcher(decodedString).matches() ||
-                    filter3.matcher(decodedString).matches();
+                    filter3.matcher(decodedString).matches()) &&
+                    !(filter4.matcher(decodedString).matches() ||
+                        filter5.matcher(decodedString).matches());
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
             return false;
