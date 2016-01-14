@@ -7,6 +7,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import shared.CalendarUtility;
 import shared.ExcelUtility;
 import shared.Feed;
 import shared.Params;
@@ -57,22 +58,27 @@ public class MazandkarCrawler extends WebCrawler{
                 return;}
             else {
                 Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
-                Elements elements = doc.select(".odd:nth-child(13) td , .odd:nth-child(9) td , .even:nth-child(2) td , .odd:nth-child(1) td");
+                Elements elements = doc.select(".odd:nth-child(15) td , .odd:nth-child(11) td , .odd:nth-child(13) td , .odd:nth-child(9) td , .even:nth-child(2) td , .odd:nth-child(1) td");
 
                 //title
-                String title = elements.get(0).text().trim();
-                elements.remove(elements.get(0));
+                String title = elements.remove(0).text();
 
                 //date
-                String[] date = elements.get(elements.size()-1).text().split(DATE_SPLITER);
-                elements.remove(elements.get(elements.size()-1));
+                String[] dates = elements.remove(elements.size() - 1).text().split(DATE_SPLITER);
+                String date = dates[0]+"/"+dates[1]+"/"+dates[2];
+                date = CalendarUtility.getEnglishDate(date);
 
                 //body
-                String body = elements.get(0).text().trim();
-                elements.remove(elements.get(0));
+                String body = elements.remove(0).text();
 
                 //city
-                String city = elements.get(0).text().trim();
+                String city;
+                if(elements.size() == 2) {
+                    city = elements.get(0).text();
+                }
+                else {
+                    city = elements.get(1).text();
+                }
 
                 try {
                     Feed feed = new Feed(
@@ -80,7 +86,7 @@ public class MazandkarCrawler extends WebCrawler{
                             body,
                             city,
                             page.getWebURL().toString(),
-                            date[2]+"/"+date[1]+"/"+date[0],
+                            date,
                             MazanKarDateFormat
                     );
                     feeds.add(feed);
