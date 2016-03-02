@@ -96,8 +96,8 @@ public class PnunaCrawler extends WebCrawler {
                             body,
                             city,
                             page.getWebURL().toString(),
-                            date,
-                            pnunaDateFormat);
+                            date
+                    );
                     feeds.add(feed);
                 } catch (ParseException e) {
                     e.printStackTrace();

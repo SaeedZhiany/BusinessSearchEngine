@@ -44,6 +44,7 @@ public class IrankarCrawler extends WebCrawler {
         try {
             String href = url.getURL().toLowerCase();
             String decodedString = URLDecoder.decode(href, "UTF8");
+            System.out.println(decodedString);
             return filter.matcher(decodedString).matches() &&
                     !decodedString.startsWith("http://www.irankar.biz/category");
         } catch (UnsupportedEncodingException ex) {
@@ -56,7 +57,6 @@ public class IrankarCrawler extends WebCrawler {
     public void visit(Page page) {
 
         if (!page.getWebURL().getURL().toLowerCase().equals("http://www.irankar.biz/")) {
-            //System.out.println(URLDecoder.decode(page.getWebURL().getURL(), "UTF8"));
             Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
             Elements elements = doc.select(".datas , p , .adsm2+ .box h4");
 
@@ -72,11 +72,11 @@ public class IrankarCrawler extends WebCrawler {
              * date[2]: year
              */
             String [] date = elements.get(elements.size()-1).text().split(DATE_SPLITTER)[1].split(DATE_DETAIL_SPLITTER);
-            date[1] = CalendarUtility.getNumericMonth(date[1]).toString(); // convert alphabet month to numeric
+            date[1] = CalendarUtility.getNumericMonth(date[1]); // convert alphabet month to numeric
 
             // remove title and city , date elements from "elements" list
             elements.remove(elements.get(0));
-            elements.remove(elements.get(elements.size()-1));
+            elements.remove(elements.get(elements.size() - 1));
 
             // for other remaining elements
             StringBuilder builder = new StringBuilder("");
@@ -85,6 +85,11 @@ public class IrankarCrawler extends WebCrawler {
             }
             String body = builder.toString();
 
+            System.out.println(title);
+            System.out.println(body);
+            System.out.println(city);
+            System.out.println(date);
+            System.out.println("==============================");
             // now, all information is ready to save into excel
             try {
                 Feed feed = new Feed(
@@ -92,8 +97,7 @@ public class IrankarCrawler extends WebCrawler {
                         body,
                         city,
                         page.getWebURL().toString(),
-                        date[2]+"/"+date[1]+"/"+date[0],
-                        IranKarDateFormat
+                        date[2]+"/"+date[1]+"/"+date[0]
                 );
                 feeds.add(feed);
             } catch (ParseException e) {

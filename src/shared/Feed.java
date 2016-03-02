@@ -1,5 +1,8 @@
 package shared;
 
+import com.ghasemkiani.util.icu.PersianCalendar;
+import com.ibm.icu.util.Calendar;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,21 +19,15 @@ public class Feed {
     private String date;
 
     public Feed() throws ParseException {
-        this(
-            "",
-            "",
-            "",
-            "",
-            new SimpleDateFormat(Params.DATE_FORMAT_YYYY_MM_DD).format(new Date()),
-            Params.DATE_FORMAT_YYYY_MM_DD);
+        this("", "", "", "", "");
     }
 
-    public Feed(String title, String body, String city, String url, String date, String curFormat) throws ParseException {
+    public Feed(String title, String body, String city, String url, String date) throws ParseException {
         this.title = title;
         this.body = body;
         this.city = city;
         this.url = url;
-        setDate(date, curFormat);
+        setDate(date);
     }
 
     public String getTitle() {
@@ -48,13 +45,18 @@ public class Feed {
     /**
      * set date in base format using given date in parameter
      * @param date fetched date directly from website
-     * @param curFormat format of the date
      * @throws ParseException
      */
-    public void setDate(String date, String curFormat) throws ParseException {
-        SimpleDateFormat userFormat = new SimpleDateFormat(curFormat);
-        SimpleDateFormat finalFormat = new SimpleDateFormat(Params.DATE_FORMAT_YYYY_MM_DD);
-        this.date = finalFormat.format(userFormat.parse(date));
+    public void setDate(String date) {
+        if(date.equals("")){
+            PersianCalendar calendar = new PersianCalendar(new Date());
+            date = String.valueOf(calendar.get(Calendar.YEAR)) + "/" +
+                    (calendar.get(Calendar.MONTH) > 10? "" : "0") +
+                    String.valueOf(calendar.get(Calendar.MONTH)) + "/" +
+                    (calendar.get(Calendar.DAY_OF_MONTH) > 10? "" : "0") +
+                    String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+        }
+        this.date = date;
     }
 
     public String getBody() {

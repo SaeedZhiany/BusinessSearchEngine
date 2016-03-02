@@ -93,8 +93,7 @@ public class NiazmaCrawler extends WebCrawler {
                     body,
                     city,
                     URLDecoder.decode(page.getWebURL().toString(), "UTF8"),
-                    date,
-                    Params.DATE_FORMAT_YYYY_MM_DD
+                    date
                 ));
             } catch (ParseException e) {
                 e.printStackTrace();

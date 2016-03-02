@@ -52,15 +52,24 @@ public class Ecity24Crawler {
             String city = elements.get(2).getText();
             String body = elements.get(3).getText();
 
+            System.out.println(title);
+            System.out.println(body);
+            System.out.println(city);
+            System.out.println(date);
+            System.out.println("=============================");
+
             try {
                 feeds.add(new Feed(
                         title,
                         body,
                         city,
                         baseURL,
-                        date,
-                        Params.DATE_FORMAT_YYYY_MM_DD
+                        date
                 ));
+                if (feeds.size() == 420) {
+                    return;
+
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }

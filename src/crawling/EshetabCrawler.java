@@ -36,6 +36,7 @@ public class EshetabCrawler extends WebCrawler {
     Pattern filter2 = Pattern.compile
             ("http://eshetab\\.com/ads/.*");
     private ArrayList<Feed> feeds;
+    int i = 0;
 
 
     @Override
@@ -63,6 +64,7 @@ public class EshetabCrawler extends WebCrawler {
         }
 
         else {
+            System.out.println(page.getWebURL().getURL());
             Document doc = Jsoup.parse(((HtmlParseData) page.getParseData()).getHtml());
             Elements elements = doc.select
                     (".addsTexts , .nameDiv:nth-child(3) , .nameDiv:nth-child(2) , .DivTitle span");
@@ -74,32 +76,39 @@ public class EshetabCrawler extends WebCrawler {
                     date.split("-")[0];
 
             date = CalendarUtility.getEnglishDate(date);
-            String city;
-            try{
-                //System.out.println(elements.get(3).text());
-                city = elements.get(3).text().split(":")[1].substring(1)
-                        .split("-")[0];
-                if(city.contains(",")){
-                    city = city.substring(1,city.length()-1);
-                }
-            }catch (IndexOutOfBoundsException e){
+            System.out.println(date);
+            String city = "نامعلوم";
+
+            //System.out.println(elements.get(3).text());
+            city = elements.get(3).text().split(":")[1].substring(1)
+                    .split("-")[0];
+            if(city.contains(",")){
+                city = city.substring(1,city.length()-1);
+            } else {
                 city = "نامعلوم";
             }
+            System.out.println(date);
+
             String body = elements.get(4).text();
             try {
+
                 feeds.add(new Feed(
-                    title,
-                    body,
-                    city,
-                    URLDecoder.decode(page.getWebURL().toString(), "UTF8"),
-                    date,
-                    Params.DATE_FORMAT_YYYY_MM_DD
+                        title,
+                        body,
+                        city,
+                        URLDecoder.decode(page.getWebURL().toString(), "UTF8"),
+                        date
                 ));
+
+
+
             } catch (ParseException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+
+
         }
     }
 

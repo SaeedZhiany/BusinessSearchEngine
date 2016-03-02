@@ -95,8 +95,8 @@ public class ExcelUtility {
                         row.getCell(INDEX_BODY).getStringCellValue(),
                         row.getCell(INDEX_CITY).getStringCellValue(),
                         row.getCell(INDEX_URL).getStringCellValue(),
-                        row.getCell(INDEX_DATE).getStringCellValue(),
-                        Params.DATE_FORMAT_YYYY_MM_DD);
+                        row.getCell(INDEX_DATE).getStringCellValue()
+                );
 
                 feeds.add(feed);
             }

@@ -78,8 +78,8 @@ public class EkaarCrawler extends WebCrawler {
                         body,
                         city,
                         page.getWebURL().toString(),
-                        date,
-                        ekaarDateFormat);
+                        date
+                );
                 feeds.add(feed);
             } catch (ParseException e) {
                 e.printStackTrace();

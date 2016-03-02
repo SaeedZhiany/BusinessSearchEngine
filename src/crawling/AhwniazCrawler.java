@@ -88,8 +88,7 @@ public class AhwniazCrawler extends WebCrawler {
                         body,
                         city,
                         page.getWebURL().toString(),
-                        date[2] + "/" + date[1] + "/" + date[0],
-                        AhwniazDateFormat
+                        date[2] + "/" + date[1] + "/" + date[0]
                 );
                 feeds.add(feed);
             }

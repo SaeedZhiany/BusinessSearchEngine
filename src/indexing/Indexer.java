@@ -59,9 +59,9 @@ public class Indexer {
         // index feed body
         TextField body = new TextField(Params.FIELD_BODY, feed.getBody(), Field.Store.YES);
         // index feed city
-        TextField city = new TextField(Params.FIELD_CITY, feed.getBody(), Field.Store.YES);
+        TextField city = new TextField(Params.FIELD_CITY, feed.getCity(), Field.Store.YES);
         // index feed date
-        StringField date = new StringField(Params.FIELD_DATE, feed.getBody(), Field.Store.YES);
+        StringField date = new StringField(Params.FIELD_DATE, feed.getDate(), Field.Store.YES);
         // index feed url
         StringField url = new StringField(Params.FIELD_URL, feed.getUrl(), Field.Store.YES);
 

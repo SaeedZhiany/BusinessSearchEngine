@@ -1,6 +1,9 @@
-import crawling.BusinessCrawlController;
-import crawling.JazbeNiruCrawler;
-import edu.uci.ics.crawler4j.crawler.CrawlController;
+import indexing.Indexer;
+import indexing.Searcher;
+import shared.Feed;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by SAEED on 2016-01-08
@@ -9,7 +12,33 @@ import edu.uci.ics.crawler4j.crawler.CrawlController;
 public class Main {
     public static void main(String[] argv){
         try {
-            CrawlController controller = BusinessCrawlController.setup();
+            Searcher searcher = Searcher.getInstance();
+            //searcher.searchTitle("مهندسی کامپیوتر",100);
+            ArrayList<Feed> list = searcher.searchCombine(
+                    "مهندسی کامپیوتر",
+                    Arrays.asList(
+                            "مهندس"
+                    ),
+                    Arrays.asList(
+                            "مشهد",
+                            "تهران"
+                    ),
+                    "1393/09/17",
+                    "1394/09/24",
+                    100
+            );
+            for (Feed feed : list){
+                System.out.println(feed.getTitle());
+                System.out.println(feed.getBody());
+                System.out.println(feed.getCity());
+                System.out.println(feed.getDate());
+                System.out.println(feed.getUrl());
+                System.out.println("=========================");
+            }
+            /*Indexer indexer = new Indexer();
+            indexer.createIndex();
+            indexer.close();*/
+            //CrawlController controller = BusinessCrawlController.setup();
             /*
             controller.addSeed("http://lastjob.ir/category/%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B9%D9%85%D9%88%D9%85%DB%8C/");
             controller.start(LastjobCrawler.class, 1);*/
@@ -22,6 +51,8 @@ public class Main {
             controller.addSeed("http://www.aftabir.com/advertising/job.php");
             controller.start(AftabirCrawler.class, 1);*/
 
+            /*controller.addSeed("http://niazma.ir/listings/category/استخدام-و-کاریابی/");
+            controller.start(NiazmaCrawler.class, 1);*/
 
             /*controller.addSeed("http://job.pnuna.com/");
             controller.start(PnunaCrawler.class, 1);*/
@@ -84,9 +115,17 @@ public class Main {
             /*controller.addSeed("http://www.bazarekariran.ir/employer-adver.php");
             controller.start(BazareKarIranCrawler.class, 1);*/
 
-            controller.addSeed("http://www.jazbeniru.com/job_posting/reputable_company/%D8%A2%DA%AF%D9%87%DB%8C-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D8%B1%DA%A9%D8%AA-%D9%87%D8%A7%DB%8C-%D9%85%D8%B9%D8%AA%D8%A8%D8%B1.aspx");
-            controller.start(JazbeNiruCrawler.class, 1);
+            /*controller.addSeed("http://www.jazbeniru.com/job_posting/reputable_company/%D8%A2%DA%AF%D9%87%DB%8C-%D9%87%D8%A7%DB%8C-%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D8%B4%D8%B1%DA%A9%D8%AA-%D9%87%D8%A7%DB%8C-%D9%85%D8%B9%D8%AA%D8%A8%D8%B1.aspx");
+            controller.start(JazbeNiruCrawler.class, 1);*/
 
+            /*controller.addSeed("http://www.mehrjob.com/");
+            controller.start(MehrjobCrawler.class, 1);*/
+
+            /*controller.addSeed("http://www.eshetab.com/");
+            controller.start(EshetabCrawler.class, 1);*/
+
+            /*controller.addSeed("http://www.irankar.biz/");
+            controller.start(IrankarCrawler.class, 1);*/
         } catch (Exception e) {
             e.printStackTrace();
             //System.out.println(e.getMessage());

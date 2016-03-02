@@ -86,8 +86,7 @@ public class MazandkarCrawler extends WebCrawler{
                             body,
                             city,
                             page.getWebURL().toString(),
-                            date,
-                            MazanKarDateFormat
+                            date
                     );
                     feeds.add(feed);
                 } catch (ParseException e) {

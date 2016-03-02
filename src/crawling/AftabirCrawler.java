@@ -8,9 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import shared.CalendarUtility;
-import shared.ExcelUtility;
 import shared.Feed;
-import shared.Params;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -95,8 +93,7 @@ public class AftabirCrawler extends WebCrawler {
                     body,
                     city,
                     URLDecoder.decode(page.getWebURL().toString(), "UTF8"),
-                    date,
-                    Params.DATE_FORMAT_YYYY_MM_DD
+                    date
                 ));
             } catch (ParseException e) {
                 e.printStackTrace();

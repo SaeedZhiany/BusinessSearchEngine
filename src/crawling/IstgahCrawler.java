@@ -71,17 +71,27 @@ public class IstgahCrawler extends WebCrawler {
         elements.remove(elements.size()-1);
 
         //date
-        String[] date = elements.text().trim().split("،")[1].split(" ");
-        date[2] = CalendarUtility.getNumericMonth(date[2]); // convert alphabet month to numeric
+        String[] dates = elements.text().trim().split("،")[1].split(" ");
+        dates[2] = CalendarUtility.getNumericMonth(dates[2]); // convert alphabet month to numeric
 
+        String date = dates[3]+ "/" +
+                (dates[2].length() == 1? "0":"") +
+                dates[2]+ "/" +
+                (dates[1].length() == 1? "0":"") +
+                dates[1];
+        date = CalendarUtility.getEnglishDate(date);
+        System.out.println(title);
+        System.out.println(body);
+        System.out.println(city);
+        System.out.println(date);
+        System.out.println("=====================================");
         try {
             Feed feed = new Feed(
                     title,
                     body,
                     city,
                     page.getWebURL().toString(),
-                    date[3]+"/"+date[2]+"/"+date[1],
-                    Params.DATE_FORMAT_YYYY_MM_DD
+                    date
             );
             feeds.add(feed);
         } catch (ParseException e) {

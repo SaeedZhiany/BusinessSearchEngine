@@ -93,8 +93,7 @@ public class Golestan118Crawler extends WebCrawler {
                     body,
                     city,
                     page.getWebURL().toString(),
-                    date,
-                    Params.DATE_FORMAT_YYYY_MM_DD
+                    date
             );
             feeds.add(feed);
         } catch (ParseException e) {
